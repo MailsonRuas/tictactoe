@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 function Square(props){
   return(
-    <button className="square" onClick={()=>props.onClick()}>
+    <button className={"square stateIs"+props.value} onClick={()=>props.onClick()}>
       {props.value}
     </button>
   );
@@ -81,14 +81,6 @@ class Game extends React.Component{
     const history=this.state.history;
     const current=history[this.state.stepNumber];
     const winner=calculateWinner(current.squares);
-    // const moves=history.map((step,move)=>{
-    //   const desc=move?'Go to move # '+move:'Go to game start';
-    //   return (
-    //     <li key={move}>
-    //       <button onClick={()=>this.jumpTo(move)}>{desc}</button>
-    //     </li>
-    //   );
-    // });
     let status;
     if(winner){
       status='Winner: '+winner;
@@ -100,13 +92,10 @@ class Game extends React.Component{
         <div className="game-board">
           <Board squares={current.squares} onClick={(i)=>this.handleClick(i)} />
         </div>
-        <div className="game-info">
-          <div>{status}</div>
-          {/* <ol>{moves}</ol> */}
-          <ul>
-            <li className="restart"><button onClick={()=>{this.jumpTo(0)}}>Restart</button></li>
-            <li className="undo" id="undo"><button onClick={()=>this.jumpTo(this.state.stepNumber-1)}>Undo</button></li>
-          </ul>
+        <div className="status">
+          <p>{status}</p>
+          <button onClick={()=>{this.jumpTo(0)}}>Restart</button>
+          <button onClick={()=>this.jumpTo(this.state.stepNumber-1)}>Undo</button>
         </div>
       </div>
     );

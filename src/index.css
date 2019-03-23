@@ -1,20 +1,14 @@
 body{
   font: 14px "Century Gothic", Futura, sans-serif;
   margin: 20px;
-}
-
-ol, ul{
-  padding-left: 30px;
+  color: #004057;
+  background-color: #CFF1FD;
 }
 
 .board-row:after{
   clear: both;
   content: "";
   display: table;
-}
-
-.status{
-  margin-bottom: 10px;
 }
 
 .board-row:first-child .square:first-child{
@@ -45,32 +39,55 @@ ol, ul{
   border-width: 1px 0 0 1px;
 }
 .square{
-  background: #fff;
-  border-color: #999;
+  background: transparent;
+  border-color: rgba(0,0,0,0.3);
   border-style: solid;
   float: left;
-  font-size: 24px;
-  font-weight: bold;
+  font-size: 12vmin;
   padding: 0;
   text-align: center;
-  width: 34px;
-  height: 34px;
-  line-height: 34px;
+  width: 20vmin;
+  height: 20vmin;
+  line-height: 20vmin;
+}
+.stateIsX{
+  color: #c0392b;
+}
+.stateIsO{
+  color: #2980b9;
 }
 
 .square:focus{
   outline: none;
 }
 
-.kbd-navigation .square:focus{
-  background: #ddd;
-}
-
 .game{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
 }
 
-.game-info{
-  margin-left: 20px;
+.status{
+  padding: 10px;
+  text-align: center;
+}
+.status p{
+  font-size: 10vmin;
+}
+.status button{
+  margin: 4px;
+  outline: none;
+  padding: 8px 15px;
+  color: #FFF;
+  border-radius: 4px;
+  border: none;
+  font-size: 1rem;
+
+  background: #0ebeff;
+  background: -moz-linear-gradient(-45deg, #0ebeff 0%, #005675 100%);
+  background: -webkit-linear-gradient(-45deg, #0ebeff 0%,#005675 100%);
+  background: linear-gradient(135deg, #0ebeff 0%,#005675 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0ebeff', endColorstr='#005675',GradientType=1 );
 }

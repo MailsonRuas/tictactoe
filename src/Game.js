@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import {IntlProvider} from 'react-intl';
+import {FormattedMessage} from 'react-intl';
+import messages from './messages';
 
 function Square(props){
   return(
@@ -83,21 +86,27 @@ class Game extends React.Component{
     const winner=calculateWinner(current.squares);
     let status;
     if(winner){
-      status='Winner: '+winner;
+      status=<FormattedMessage id="winner" defaultMessage="Winner: {x}" values={{x: winner}} />;
     }else{
-      status='Next player: '+(this.state.xIsNext?'X':'O');
+      status=<FormattedMessage id="next" defaultMessage="Next player: {x}" values={{x: this.state.xIsNext?'X':'O'}} />;
     }
     return (
-      <div className="game">
-        <div className="game-board">
-          <Board squares={current.squares} onClick={(i)=>this.handleClick(i)} />
+      <IntlProvider locale={navigator.language} messages={messages[navigator.language]}>
+        <div className="game">
+          <div className="game-board">
+            <Board squares={current.squares} onClick={(i)=>this.handleClick(i)} />
+          </div>
+          <div className="status">
+            <p>{status}</p>
+            <button onClick={()=>{this.jumpTo(0)}}>
+              <FormattedMessage id="restart" defaultMessage="Restart" />
+            </button>
+            <button onClick={()=>this.jumpTo(this.state.stepNumber-1)}>
+              <FormattedMessage id="undo" defaultMessage="Undo" />
+            </button>
+          </div>
         </div>
-        <div className="status">
-          <p>{status}</p>
-          <button onClick={()=>{this.jumpTo(0)}}>Restart</button>
-          <button onClick={()=>this.jumpTo(this.state.stepNumber-1)}>Undo</button>
-        </div>
-      </div>
+      </IntlProvider>
     );
   }
 }
